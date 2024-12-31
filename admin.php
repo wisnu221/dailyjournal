@@ -26,9 +26,7 @@ if (!isset($_SESSION['username'])) {
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
     crossorigin="anonymous"
     /> 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js">
-        
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>  
         html {
             position: relative;
@@ -83,11 +81,25 @@ if (!isset($_SESSION['username'])) {
     </nav>
     <!-- nav end -->
     <!-- content begin -->
-    <section id="content" class="p-5">
-        <div class="container"> 
-            Selamat datang <?= $_SESSION['username'] ?>
-        </div> 
-    </section>
+    <!-- content begin -->
+<section id="content" class="p-5">
+    <div class="container">
+        <?php
+        if(isset($_GET['page'])){
+        ?>
+            <h4 class="lead display-6 pb-2 border-bottom border-danger-subtle"><?= ucfirst($_GET['page'])?></h4>
+            <?php
+            include($_GET['page'].".php");
+        }else{
+        ?>
+            <h4 class="lead display-6 pb-2 border-bottom border-danger-subtle">Dashboard</h4>
+            <?php
+            include("dashboard.php");
+        }
+        ?>
+    </div>
+</section>
+<!-- content end -->
     <!-- content end -->
     <!-- footer begin -->
     <footer class="text-center p-5 bg-danger-subtle">
