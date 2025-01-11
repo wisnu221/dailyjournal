@@ -31,9 +31,11 @@ if (!isset($_SESSION['username'])) {
             position: relative;
             min-height: 100%;
         }
+        
         body {
             margin-bottom: 100px; /* Margin bottom by footer height */
         }
+        
         footer {
             position: absolute;
             bottom: 0;
@@ -46,7 +48,7 @@ if (!isset($_SESSION['username'])) {
     <!-- nav begin -->
     <nav class="navbar navbar-expand-sm bg-body-tertiary sticky-top bg-danger-subtle">
     <div class="container">
-        <a class="navbar-brand" target="_blank" href=".">My Daily Journal</a>
+        <a class="navbar-brand" href="admin.php">My Daily Journal</a>
         <button
         class="navbar-toggler"
         type="button"
@@ -65,13 +67,20 @@ if (!isset($_SESSION['username'])) {
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="admin.php?page=article">Article</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="admin.php?page=gallery">Gallery</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="index.php"><b>Homepage</b></a>
             </li> 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-danger fw-bold" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <?= $_SESSION['username']?>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="logout.php">Logout</a></li> 
+                    <li><a class="nav-item dropdown-item" href="admin.php?page=profile">Profile <?php echo $_SESSION['username']; ?></a></li>
+                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                 </ul>
             </li> 
         </ul>
@@ -80,24 +89,24 @@ if (!isset($_SESSION['username'])) {
     </nav>
     <!-- nav end -->
     <!-- content begin -->
-<section id="content" class="p-5">
-    <div class="container">
-        <?php
-        if(isset($_GET['page'])){
-        ?>
-            <h4 class="lead display-6 pb-2 border-bottom border-danger-subtle"><?= ucfirst($_GET['page'])?></h4>
+    <section id="content" class="p-5">
+        <div class="container">
             <?php
-            include($_GET['page'].".php");
-        }else{
-        ?>
-            <h4 class="lead display-6 pb-2 border-bottom border-danger-subtle">Dashboard</h4>
-            <?php
-            include("dashboard.php");
-        }
-        ?>
-    </div>
-</section>
-<!-- content end -->
+            if(isset($_GET['page'])){
+            ?>
+                <h4 class="lead display-6 pb-2 border-bottom border-danger-subtle"><?= ucfirst($_GET['page'])?></h4>
+                <?php
+                include($_GET['page'].".php");
+            }else{
+            ?>
+                <h4 class="lead display-6 pb-2 border-bottom border-danger-subtle">Dashboard</h4>
+                <?php
+                include("dashboard.php");
+            }
+            ?>
+        </div>
+    </section>
+    <!-- content end -->
     <!-- footer begin -->
     <footer class="text-center p-3 bg-danger-subtle">
     <div>
@@ -111,7 +120,7 @@ if (!isset($_SESSION['username'])) {
         ><i class="bi bi-whatsapp h2 p-2 text-dark"></i
         ></a>
     </div>
-    <div> Vian Aryasatya Nugraha &copy; 2023</div>
+    <div>Adhitya Wisnu Priambadha &copy; 2025</div>
     </footer>
     <!-- footer end -->
     <script

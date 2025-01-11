@@ -4,7 +4,7 @@ date_default_timezone_set('Asia/Jakarta');
 $servername = "localhost";
 $username = "root";
 $password = "";
-$db = "webdailyjournal"; //nama database
+$db = "p"; //nama database
 
 //create connection
 $conn = new mysqli($servername,$username,$password,$db);
@@ -14,5 +14,6 @@ if($conn->connect_error){
 	//jika ada, hentikan script dan tampilkan pesan error
 	die("Connection failed : ".$conn->connect_error);
 }
-//echo "Connected successfully<hr>";
+
+// echo "Connected successfully<hr>";
 ?>

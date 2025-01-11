@@ -6,7 +6,7 @@ include "koneksi.php";
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PortoFolio</title>
+    <title>Myjournal</title>
     <link rel="icon" href="img/logo.png" />
     <link
       rel="stylesheet"
@@ -23,7 +23,7 @@ include "koneksi.php";
     <!-- nav begin -->
     <nav class="navbar navbar-expand-sm bg-body-tertiary sticky-top">
       <div class="container">
-        <a class="navbar-brand" href="#">PORTOFOLIO</a>
+        <a class="navbar-brand" href="#">Myjounal</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -80,13 +80,13 @@ include "koneksi.php";
     <section id="hero" class="text-center p-5 bg-danger-subtle text-sm-start">
       <div class="container">
         <div class="d-sm-flex flex-sm-row-reverse align-items-center">
-          <img src="https://wallpaperaccess.com/full/1564224.jpg" class="img-fluid" width="300" />
+          <img src="https://th.bing.com/th/id/OIP.1tcuI5lAnB3QQ5mnDjIgCQHaHa?w=202&h=202&c=7&r=0&o=5&dpr=1.5&pid=1.7" class="img-fluid" width="300" />
           <div>
             <h1 class="fw-bold display-4">
-              Create Memories, Save Memories, Everyday
+             Keseharianku sehari-hari
             </h1>
             <h4 class="lead display-6">
-              Mencatat semua kegiatan sehari-hari <br> Muhammad Rizki Mahendra
+              Jenis-jenis kucing <br> Adhitya Wisnu Priambadha
             </h4>
             <h6>
               <span id="tanggal"></span>
@@ -103,8 +103,8 @@ include "koneksi.php";
     <h1 class="fw-bold display-4 pb-3">article</h1>
     <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
       <?php
-      $sql = "SELECT * FROM article ORDER BY tanggal DESC";
-      $hasil = $conn->query($sql); 
+       $sql_article = "SELECT * FROM article ORDER BY tanggal DESC";
+       $hasil = $conn->query($sql_article); 
 
       while($row = $hasil->fetch_assoc()){
       ?>
@@ -131,48 +131,46 @@ include "koneksi.php";
   </div>
 </section>
 <!-- article end -->
-    <!-- gallery begin -->
-    <section id="gallery" class="text-center p-5 bg-danger-subtle">
-      <div class="container">
-        <h1 class="fw-bold display-4 pb-3">Gallery</h1>
-        <div id="carouselExample" class="carousel slide">
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img src="img/Bunga di gunung Merbabu.jpeg" class="d-block w-100" alt="..." />
+  
+     <!-- gallery begin -->
+     <section id="gallery" class="text-center p-5 bg-danger-subtle">
+      <h1 class="fw-bold display-4 pb-3">Gallery</h1>
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner ratio ratio-16x9">
+          <?php
+          // Koneksi ke database
+          include 'koneksi.php';
+          
+          // Query untuk mengambil data dari tabel gallery
+          $sql_gallery = "SELECT * FROM gallery";
+          $result = $conn->query($sql_gallery); 
+          
+          $first = true; // Variable untuk menandai item pertama
+          
+          while($row = mysqli_fetch_assoc($result)) {
+            // Tambahkan class active untuk item pertama
+            $activeClass = $first ? 'active' : '';
+          ?>
+            <div class="carousel-item <?php echo $activeClass; ?>" data-bs-interval="2000">
+              <img src="img/<?= $row["gambar"]?>" class="d-block w-100">
             </div>
-            <div class="carousel-item">
-              <img src="img/pohon suwanting.jpg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="img/View Merbabu.jpeg" class="d-block w-100" alt="..." />
-            </div>
-            <div class="carousel-item">
-              <img src="img/View phon suwanting.jpeg" class="d-block w-100" alt="..." />
-            </div>
-          </div>
-          <button
-            class="carousel-control-prev"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button
-            class="carousel-control-next"
-            type="button"
-            data-bs-target="#carouselExample"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
+          <?php
+            $first = false; // Set false setelah item pertama
+          }
+          ?>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
     </section>
     <!-- gallery end -->
-    <!-- schedule begin -->
+<!-- schedule begin -->
     <section id="schedule" class="text-center p-5">
       <div class="container">
         <h1 class="fw-bold display-4 pb-3">Schedule</h1>
@@ -182,10 +180,10 @@ include "koneksi.php";
               <div class="card-header bg-danger text-white">SENIN</div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  Etika Profesi<br />16.20-18.00 | H.4.4
+                  Sistem operasi<br />16.20-18.00 | H.4.4
                 </li>
                 <li class="list-group-item">
-                  Sistem Operasi<br />18.30-21.00 | H.4.8
+                  Sistem informasi<br />18.30-21.00 | H.4.8
                 </li>
               </ul>
             </div>
@@ -201,7 +199,7 @@ include "koneksi.php";
                   Probabilitas dan Statistik<br />15.30-18.00 | H.4.9
                 </li>
                 <li class="list-group-item">
-                  Kecerdasan Buatan<br />18.30-21.00 | H.4.11
+                  Logika  informatika<br />18.30-21.00 | H.4.11
                 </li>
               </ul>
             </div>
@@ -211,7 +209,7 @@ include "koneksi.php";
               <div class="card-header bg-danger text-white">RABU</div>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                  Manajemen Proyek Teknologi Informasi<br />15.30-18.00 | H.4.6
+                  Basis data<br />15.30-18.00 | H.4.6
                 </li>
               </ul>
             </div>
@@ -260,14 +258,14 @@ include "koneksi.php";
         <div class="d-sm-flex align-items-center justify-content-center">
           <div class="p-3">
             <img
-              src="https://tse3.mm.bing.net/th?id=OIP.Yx6qHJ4uoA0DnwfJwQCDxQHaHa&pid=Api&P=0&h=180"
+              src="https://th.bing.com/th/id/OIP.NfbU5nmb_ntb7IrRL65QEAAAAA?w=186&h=177&c=7&r=0&o=5&dpr=1.5&pid=1.7"
               class="rounded-circle border shadow"
               width="300"
             />
           </div>
           <div class="p-md-5 text-sm-start">
-            <h3 class="lead">A11.2023.15387</h3>
-            <h1 class="fw-bold">Muhmmad Rizki Mahendra</h1>
+            <h3 class="lead">A11.2023.15397</h3>
+            <h1 class="fw-bold">Adhitya Wisnu Priambadha</h1>
             Program Studi Teknik Informatika<br />
             <a href="https://dinus.ac.id/" class="fw-bold text-decoration-none"
               >Universitas Dian Nuswantoro</a
@@ -290,7 +288,7 @@ include "koneksi.php";
           ><i class="bi bi-whatsapp h2 p-2"></i
         ></a>
       </div>
-      <div>Muhammad Rizki Mahendra &copy; 2024</div>
+      <div>Adhitya Wisnu Priambadha &copy; 2025</div>
     </footer>
     <!-- footer end -->
 
